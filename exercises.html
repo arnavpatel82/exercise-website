@@ -1,0 +1,132 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="exercises.css">
+
+
+<div class="banner">
+
+    <div class="navbar">
+        <a href="homepage.html">
+        <img src="images/school-logo.png" class="logo" href="#">
+        </a>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="quiz.html">Quizzes</a></li>
+          <li><a href="exercises.html">Exercises</a></li> 
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="card card-body">
+    
+            <input id="search-input" class="form-control" type="text" placeholder="Search for an exercise - just start typing!">
+    
+        </div>
+    </div>
+
+    <br>
+    
+    <table class="table table-striped">
+        <tr  class="bg-info">
+            <th  class="bg-info" data-colname="exercise" data-order="desc">Exercise</th>
+            <th  data-colname="type" data-order="desc">Type</th>
+            <th  data-colname="level" data-order="desc">Level</th>
+        </tr>
+        <tbody id="myTable">
+            
+        </tbody>
+    
+    </table>
+    
+    <script>
+    //list of all exercises provided by client
+    var exerciseList = [
+        {'exercise':'Dumbbell Bench Press', 'type':'Chest Exercise', 'level':'Intermediate'},
+        {'exercise':'Barbell Bench Press', 'type':'Chest Exercise', 'level':'Intermediate'},
+        {'exercise':'Push Up', 'type':'Chest Exercise', 'level':'Beginner'},
+        {'exercise':'Chest Fly', 'type':'Chest Exercise', 'level':'Beginner'},
+        {'exercise':'Lat Pulldown', 'type':'Back Exercise', 'level':'Beginner'},
+        {'exercise':'Pull Up', 'type':'Back Exercise', 'level':'Intermediate'},
+        {'exercise':'Weighted Pull Up', 'type':'Back Exercise', 'level':'Advanced'},
+        {'exercise':'Dumbbell Row', 'type':'Back Exercise', 'level':'Beginner'},
+        {'exercise':'Barbell Row', 'type':'Back Exercise', 'level':'Intermediate'},
+        {'exercise':'Deadlift', 'type':'Back Exercise', 'level':'Advanced'},
+        {'exercise':'Bicep curl', 'type':'Arm Exercise', 'level':'Beginner'},
+        {'exercise':'Tricep Extension', 'type':'Arm Exercise', 'level':'Beginner'},
+        {'exercise':'Bodyweight Squat', 'type':'Leg Exercise', 'level':'Beginner'},
+        {'exercise':'Barbell Squat', 'type':'Leg Exercise', 'level':'Intermediate'},
+        {'exercise':'Leg Press', 'type':'Leg Exercise', 'level':'Advanced'},
+        {'exercise':'Jump Rope', 'type':'Cardio', 'level':'Advanced'},
+        {'exercise':'Stair Master', 'type':'Cardio', 'level':'Beginner'},
+        {'exercise':'Swimming', 'type':'Cardio', 'level':'Intermediate'},
+        {'exercise':'Cycling', 'type':'Cardio', 'level':'Intermediate'},
+        {'exercise':'Jogging', 'type':'Cardio', 'level':'Beginner'},
+        {'exercise':'Running', 'type':'Cardio', 'level':'Intermediate'},
+
+    ]
+    // the user enters the search input, when 'return' key is pressed, 
+    // the following code will be executed
+    $('#search-input').on('keyup', function(event){
+        // keyCode 13 is most keyboard's 'return' key
+        if (event.keyCode === 13)
+            //value is the search input
+            var value = $(this).val()
+            //function 1
+            var data = searchTable(value,exerciseList)
+            //function 2
+            buildTable(data)
+    })
+    
+    //build initial table
+    buildTable(exerciseList)
+    
+    function searchTable(value, data){
+        //declare variable - dictionary containing all the exericises 
+        //matching the search
+        var filteredData = []
+    
+        //create a loop, that checks if the substring "#search-input" 
+        //is contained in the string "data[i]"
+        for (var i = 0; i < data.length; i++){
+            value = value.toLowerCase()
+            //removes the need for capitalisation
+            var name = data[i].exercise.toLowerCase()
+    
+            if (name.includes(value)){
+                //if the data[i].exercise contains the search, 
+                //it will be appended to the filtered data dictionary
+                filteredData.push(data[i])
+            }
+    
+        }
+    
+        return filteredData
+    }
+    
+    function buildTable(data){
+        //inserts the later created html into the mytable tbody  
+        var table = document.getElementById('myTable')
+    
+        table.innerHTML = ''
+        //build html to be displayed
+        for (var i = 0; i < data.length; i++){
+    
+            var row = `<tr><br>
+                            <td>${data[i].exercise}</td>
+                            <td>${data[i].type}</td>
+                            <td>${data[i].level}</td>
+                        <tr>`
+            table.innerHTML += row 
+            //loops through the filtered array and display the exercises, types, and level 
+            //of each element during the iteration
+                            
+        }
+    }
+    </script>
+    
+    
+    
+</div>
+

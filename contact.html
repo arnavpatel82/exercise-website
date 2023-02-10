@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <title>Contact</title> 
+    <link rel="stylesheet" href="contact.css">
+
+</head>
+
+<body>
+    <div class="banner">
+
+        <div class="navbar">
+            <a href="homepage.html">
+            <img src="images/school-logo.png" class="logo" href="#">
+            </a>
+            <ul>
+              <li><a href="about.html">About</a></li>
+              <li><a href="resources.html">Resources</a></li>
+              <li><a href="quiz.html">Quizzes</a></li>
+              <li><a href="exercises.html">Exercises</a></li> 
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="heading">
+            <br>
+            <h1>Contact us</h1>
+            <br>
+        </div>
+
+        <div style="margin:0 auto;text-align:center;margin-top: 5%;">
+
+            <div class="details" style="margin-left:auto;margin-right:auto;">
+                <h2 style="color: rgb(229, 167, 160);">Email: </h2>
+                <h3 id="email-address" style="color: silver;">email@address.com </h3>
+
+                <br>
+
+                <h2 style="color: rgb(229, 167, 160);">Phone Number: </h2>
+                <h3 id="phone-number" style="color: silver;">+12 345 678 91 011</h3>
+                <br><br><br><br>
+            </div>
+
+            <button onclick="clipboardCopy('email-address')"><a href="#"><span></span>COPY EMAIL</a></button>
+            <button onclick="clipboardCopy('phone-number')"><a href="#"><span></span>COPY PHONE NUMBER</a></button>
+
+            <script>
+                //this function is called when the above buttons are clicked
+                function clipboardCopy(id){
+                    //the ID (email or phone number) is entered
+                    var text = document.createRange();
+                    text.selectNode(document.getElementById(id));
+                    window.getSelection().addRange(text);
+                    //copies 'text' (the text) to clipboard
+                    document.execCommand('copy');
+                    window.getSelection().removeAllRanges();
+                    //informs the user that the text has been copied
+                    alert("Text copied: " + text);
+                }
+            </script>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
